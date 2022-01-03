@@ -10,11 +10,11 @@ class PkgStatus(Enum):
     ERROR = "Error"
     NOT_SURE = 'Could not determine'
 
-class Yay(dotbot.Plugin):
-    _directive = 'yay'
+class Pacman(dotbot.Plugin):
+    _directive = 'pacman'
 
     def __init__(self, context):
-        super(Yay, self).__init__(self)
+        super(Pacman, self).__init__(self)
         self._context = context
         self._strings = {}
 
@@ -30,12 +30,12 @@ class Yay(dotbot.Plugin):
 
     def handle(self, directive, data):
         if directive != self._directive:
-            raise ValueError('Yay cannot handle directive %s' %
+            raise ValueError('Pacman cannot handle directive %s' %
                 directive)
         return self._process(data)
 
     def _process(self, packages):
-        defaults = self._context.defaults().get('yay', {})
+        defaults = self._context.defaults().get('pacman', {})
         results = {}
         successful = [PkgStatus.UP_TO_DATE, PkgStatus.UPDATED, PkgStatus.INSTALLED]
 
@@ -68,7 +68,7 @@ class Yay(dotbot.Plugin):
     def _install(self, pkg):
         # to have a unified string which we can query
         # we need to execute the command with LANG=en_US
-        cmd = 'LANG=en_US yay --needed --noconfirm -S {}'.format(pkg)
+        cmd = 'LANG=en_US pacman --needed --noconfirm -S {}'.format(pkg)
 
         self._log.info("Installing \"{}\". Please wait...".format(pkg))
 
