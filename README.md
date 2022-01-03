@@ -1,4 +1,4 @@
-# Dotbot yay Plugin
+# Dotbot pacman Plugin
 
 For use with [dotbot](https://github.com/anishathalye/dotbot),
 this plugin allows one to easily install or upgrade a list of pacman packages.
